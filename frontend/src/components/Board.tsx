@@ -7,6 +7,7 @@ import {
 } from "react";
 
 import Tile from "./Tile";
+import { Enemy, Player } from "./Images";
 
 const Board: FunctionComponent<BoardProps> = ({ height, width }) => {
   const [moves, setMoves] = useState(0);
@@ -74,8 +75,8 @@ const Board: FunctionComponent<BoardProps> = ({ height, width }) => {
     >
       {new Array(width * height).fill(null).map((_, i) => (
         <Tile key={i}>
-          {player === i && "P"}
-          {enemies.includes(i) && "E"}
+          {player === i && <Player className="h-full w-full" />}
+          {enemies.includes(i) && <Enemy className="h-full w-full" />}
         </Tile>
       ))}
     </div>
