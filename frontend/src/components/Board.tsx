@@ -54,10 +54,10 @@ const Board: FunctionComponent<BoardProps> = ({ height, width }) => {
   }, [height, width]);
 
   useEffect(() => {
-    window.addEventListener("keydown", handleKeyDown);
+    if (enemies.length > 0) window.addEventListener("keydown", handleKeyDown);
 
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [handleKeyDown]);
+  }, [enemies, handleKeyDown]);
 
   useEffect(() => {
     if (enemies.length === 0 && moves > 0)
