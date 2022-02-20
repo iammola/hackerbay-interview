@@ -30,7 +30,7 @@ const Board: FunctionComponent<BoardProps> = ({ height, width }) => {
       }
 
       if (["ArrowUp", "ArrowDown"].includes(e.key)) {
-        nextPosition = player + height * (e.key === "ArrowUp" ? -1 : 1);
+        nextPosition = player + width * (e.key === "ArrowUp" ? -1 : 1);
         if (nextPosition < 0 || nextPosition > height * width) return;
       }
 
