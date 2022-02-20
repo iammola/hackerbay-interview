@@ -9,7 +9,7 @@ import {
 import Tile from "./Tile";
 
 const Board: FunctionComponent<BoardProps> = ({ height, width }) => {
-  const [, setMoves] = useState(0);
+  const [moves, setMoves] = useState(0);
   const [player, setPlayer] = useState<number>();
   const [enemies, setEnemies] = useState<number[]>([]);
 
@@ -58,6 +58,11 @@ const Board: FunctionComponent<BoardProps> = ({ height, width }) => {
 
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [handleKeyDown]);
+
+  useEffect(() => {
+    if (enemies.length === 0 && moves > 0)
+      alert(`Game over. Total moves to save princess: ${moves}`);
+  }, [enemies, moves]);
 
   return (
     <div
