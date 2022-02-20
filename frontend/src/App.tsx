@@ -18,7 +18,11 @@ const App: FunctionComponent = () => {
       }));
   }, [size]);
 
-  return <Board {...size} />;
+  return (
+    <div className="flex h-screen w-screen items-center justify-center">
+      <Board {...size} />
+    </div>
+  );
 };
 
 export default App;
