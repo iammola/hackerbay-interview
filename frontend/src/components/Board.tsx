@@ -18,23 +18,25 @@ const Board: FunctionComponent<BoardProps> = ({ height, width }) => {
       if (["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown"].includes(e.key))
         e.preventDefault();
 
+      let nextPosition = player;
       if (["ArrowLeft", "ArrowRight"].includes(e.key)) {
         const newX = player % width;
-        const nextPosition = player + (e.key === "ArrowLeft" ? -1 : 1);
+        nextPosition = player + (e.key === "ArrowLeft" ? -1 : 1);
 
         if (e.key === "ArrowLeft" && newX === 0) return;
         if (e.key === "ArrowRight" && newX === width - 1) return;
-
-        setPlayer(nextPosition);
       }
 
       if (["ArrowUp", "ArrowDown"].includes(e.key)) {
-        const nextPosition = player + height * (e.key === "ArrowUp" ? -1 : 1);
-        if (nextPosition >= 0 && nextPosition <= height * width)
-          setPlayer(nextPosition);
+        nextPosition = player + height * (e.key === "ArrowUp" ? -1 : 1);
+        if (nextPosition < 0 || nextPosition > height * width) return;
       }
+
+      setPlayer(nextPosition);
+      if (enemies.includes(nextPosition))
+        setEnemies(enemies.filter((e) => e !== nextPosition));
     },
-    [height, player, width]
+    [enemies, height, player, width]
   );
 
   useLayoutEffect(() => {
