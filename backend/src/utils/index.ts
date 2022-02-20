@@ -2,6 +2,9 @@ import { ReasonPhrases, StatusCodes } from "http-status-codes";
 
 import type { Request, Response } from "restify";
 
+export const JWT_ALG = "PS256";
+export const JWT_TOKEN_NAME = "hackerbay-jwt";
+
 export async function routeWrapper(
   req: Request,
   res: Response,
