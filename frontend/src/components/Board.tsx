@@ -9,6 +9,7 @@ import {
 import Tile from "./Tile";
 
 const Board: FunctionComponent<BoardProps> = ({ height, width }) => {
+  const [, setMoves] = useState(0);
   const [player, setPlayer] = useState<number>();
   const [enemies, setEnemies] = useState<number[]>([]);
 
@@ -33,6 +34,7 @@ const Board: FunctionComponent<BoardProps> = ({ height, width }) => {
       }
 
       setPlayer(nextPosition);
+      setMoves((moves) => moves + 1);
       if (enemies.includes(nextPosition))
         setEnemies(enemies.filter((e) => e !== nextPosition));
     },
