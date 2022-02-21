@@ -6,7 +6,7 @@ import { routeWrapper, validateJWT } from "../utils";
 
 import type { Request, Response } from "restify";
 
-export const shrinkImage = (req: Request, res: Response) =>
+export const shrinkImageToThumbnail = (req: Request, res: Response) =>
   routeWrapper(req, res, handler);
 
 async function handler(req: Request, res: Response) {
