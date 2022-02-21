@@ -97,3 +97,24 @@ Authorization: "Bearer <YOUR_JWT_TOKEN>"
 #### Response
 
 `File` - The `50x50` thumbnail
+
+## Setup
+
+Clone the project
+
+```bash
+git clone https://github.com/iammola/hackerbay-interview my-project
+```
+
+Go to the project directory and install dependencies
+
+```bash
+cd my-project
+npm install
+```
+
+Start the dev server
+
+```bash
+npm run dev
+```
