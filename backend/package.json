@@ -4,7 +4,8 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "start": "tsc && node --experimental-specifier-resolution=node build/server",
+    "build": "tsc",
+    "start": "node --experimental-specifier-resolution=node build/server",
     "dev": "nodemon"
   },
   "eslintIgnore": [
