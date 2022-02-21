@@ -6,6 +6,11 @@ import type { Request, Response } from "restify";
 export const JWT_ALG = "PS256";
 export const JWT_TOKEN_NAME = "hackerbay-jwt";
 
+/**
+ * @param req HTTP Request
+ * @param res HTTP Response
+ * @param routerHandler Endpoints handler
+ */
 export async function routeWrapper(
   req: Request,
   res: Response,
@@ -22,6 +27,11 @@ export async function routeWrapper(
   }
 }
 
+/**
+ * Validate JWT token
+ * Throws a JWSSignatureVerificationFailed error if verification fails
+ * @param req HTTP Request
+ */
 export async function validateJWT({ headers, cookies }: Request) {
   try {
     const [type, token] = (headers.authorization ?? "").split(" ");

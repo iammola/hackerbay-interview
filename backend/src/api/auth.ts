@@ -3,6 +3,7 @@ import { StatusCodes } from "http-status-codes";
 
 import { JWT_ALG, JWT_TOKEN_NAME, routeWrapper } from "../utils";
 
+import type { AuthRequestBody } from "../types";
 import type { Request, Response } from "restify";
 
 export const authUser = (req: Request, res: Response) =>
@@ -11,7 +12,7 @@ export const authUser = (req: Request, res: Response) =>
 async function handler({ body }: Request, res: Response) {
   if (typeof body !== "string") throw new Error("Invalid Body");
 
-  const data = JSON.parse(body) as Body;
+  const data = JSON.parse(body) as AuthRequestBody;
   if (!data.username || !data.password) throw new Error("Missing properties");
 
   const { privateKey, publicKey } = await jose.generateKeyPair(JWT_ALG);
@@ -30,8 +31,3 @@ async function handler({ body }: Request, res: Response) {
   });
   res.json({ jwt });
 }
-
-type Body = {
-  username: string;
-  password: string;
-};
