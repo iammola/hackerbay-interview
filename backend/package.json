@@ -21,7 +21,9 @@
   },
   "nodemonConfig": {
     "watch": [
-      "src"
+      "src",
+      "tsconfig.json",
+      "package.json"
     ],
     "ext": ".ts,.js",
     "exec": "ts-node ./src/server.ts"
