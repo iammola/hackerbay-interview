@@ -2,8 +2,9 @@
   "name": "hackerbay-interview-backend",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
-    "start": "tsc && node build/server.js",
+    "start": "tsc && node --experimental-specifier-resolution=node build/server",
     "dev": "nodemon"
   },
   "eslintIgnore": [
@@ -26,7 +27,7 @@
       "package.json"
     ],
     "ext": ".ts,.js",
-    "exec": "ts-node ./src/server.ts"
+    "exec": "node --loader ts-node/esm --experimental-specifier-resolution=node src/server"
   },
   "dependencies": {
     "got": "^12.0.1",
