@@ -4,6 +4,8 @@
 
 This is my attempt at the HackerBay Interview Backend Task.
 
+[Link to DockerHub Repository :whale2:](https://hub.docker.com/r/iammola/hackerbayinterviewbackend)
+
 ## Authorization
 
 All API requests required the use of a JWT token. You can get your JWT token by navigating to the `/api/auth/` endpoint with your username and password.
