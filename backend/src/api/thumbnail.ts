@@ -18,6 +18,13 @@ async function handler(req: Request, res: Response) {
   const { url } = (
     typeof req.body === "string" ? JSON.parse(req.body) : req.body || {}
   ) as ThumbnailRequestBody;
+
+  const requestContentType =
+    (await got.head(new URL(url))).headers["content-type"] ?? "";
+
+  if (!/^image\//.test(requestContentType))
+    throw new Error("Resource is not an image");
+
   got
     .stream(new URL(url))
     .pipe(resizer)
