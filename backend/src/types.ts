@@ -1,3 +1,5 @@
+import type { FormatEnum } from "sharp";
+
 export type PatchRequestBody = {
   /** The original document */
   doc: Record<string, unknown>;
@@ -45,4 +47,9 @@ export type AuthRequestBody = {
 export type ThumbnailRequestBody = {
   /** URL to public image */
   url: string;
+  /**
+   * Format of resulting image (default - png)
+   * @default png
+   */
+  format?: keyof FormatEnum;
 };
