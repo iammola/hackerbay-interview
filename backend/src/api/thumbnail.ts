@@ -14,8 +14,7 @@ async function handler(req: Request, res: Response) {
   const invalid = await validateJWT(req, res);
   if (invalid) return;
 
-  const resizer = sharp().resize(50, 50);
-  const { url } = (
+  const { url, format = "png" } = (
     typeof req.body === "string" ? JSON.parse(req.body) : req.body || {}
   ) as ThumbnailRequestBody;
 
@@ -24,6 +23,8 @@ async function handler(req: Request, res: Response) {
 
   if (!/^image\//.test(requestContentType))
     throw new Error("Resource is not an image");
+
+  const resizer = sharp().resize(50, 50).toFormat(format);
 
   got
     .stream(new URL(url))
