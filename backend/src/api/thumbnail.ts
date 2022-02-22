@@ -1,5 +1,6 @@
 import { got } from "got";
 import sharp from "sharp";
+import { contentType } from "mime-types";
 import { StatusCodes } from "http-status-codes";
 
 import { routeWrapper, validateJWT } from "../utils";
@@ -25,6 +26,8 @@ async function handler(req: Request, res: Response) {
     throw new Error("Resource is not an image");
 
   const resizer = sharp().resize(50, 50).toFormat(format);
+
+  res.setHeader("Content-Type", contentType(format) || "image/png");
 
   got
     .stream(new URL(url))
