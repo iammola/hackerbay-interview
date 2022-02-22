@@ -11,7 +11,7 @@ echo "$(git diff --name-only --diff-filter=ACMR)" > ".github/hooks/.u";
 FULLY_STAGED=$(comm -23 ".github/hooks/.s" ".github/hooks/.u");
 rm -f ".github/hooks/.s" ".github/hooks/.u";
 
-run linters
+# run linters
 echo "$FILES" | grep  -E '\.(?:t|j)sx?$' | xargs ./node_modules/.bin/eslint --quiet --format stylish &&
 echo "$FILES" | xargs ./node_modules/.bin/prettier --ignore-unknown --write;
 
