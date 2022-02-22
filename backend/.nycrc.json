@@ -1,0 +1,11 @@
+{
+  "all": true,
+  "cache": false,
+  "source-map": true,
+  "instrument": true,
+  "check-coverage": false,
+  "extension": [".ts"],
+  "include": ["src/api/*.ts"],
+  "tempDir": "./coverage/.nyc_output",
+  "reporter": ["html", "text", "text-summary"]
+}

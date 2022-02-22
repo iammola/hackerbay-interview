@@ -1,0 +1,13 @@
+{
+  "bail": true,
+  "exit": true,
+  "recursive": true,
+  "require": ["ts-node/register", "source-map-support/register"],
+  "color": true,
+  "spec": "tests/**/*.ts",
+  "node-option": [
+    "experimental-specifier-resolution=node",
+    "loader=ts-node/esm"
+  ],
+  "extension": ["ts"]
+}
