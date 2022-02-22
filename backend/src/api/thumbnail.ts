@@ -1,5 +1,5 @@
 import { got } from "got";
-import sharp from "sharp";
+import sharp, { FormatEnum } from "sharp";
 import { contentType } from "mime-types";
 import { StatusCodes } from "http-status-codes";
 
@@ -7,6 +7,12 @@ import { routeWrapper, validateJWT } from "../utils";
 
 import type { Request, Response } from "restify";
 import type { ThumbnailRequestBody } from "../types";
+
+const formats = [
+  ...["avif", "dz", "fits", "gif", "heif", "input", "jpeg", "jpg", "magick"],
+  ...["openslide", "pdf", "png", "ppm", "raw", "svg", "tiff", "tif", "v"],
+  "webp",
+] as (keyof FormatEnum)[];
 
 export const shrinkImageToThumbnail = (req: Request, res: Response) =>
   routeWrapper(req, res, handler);
@@ -18,6 +24,8 @@ async function handler(req: Request, res: Response) {
   const { url, format = "png" } = (
     typeof req.body === "string" ? JSON.parse(req.body) : req.body || {}
   ) as ThumbnailRequestBody;
+
+  if (!formats.includes(format)) throw new Error("Invalid Format Type");
 
   const requestContentType =
     (await got.head(new URL(url))).headers["content-type"] ?? "";
