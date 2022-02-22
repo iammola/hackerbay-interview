@@ -13,9 +13,9 @@ async function handler(req: Request, res: Response) {
   const invalid = await validateJWT(req, res);
   if (invalid) return;
 
-  if (typeof req.body !== "string") throw new Error("Invalid Body");
-
-  const { doc, patch } = JSON.parse(req.body) as PatchRequestBody;
+  const { doc, patch } = (
+    typeof req.body === "string" ? JSON.parse(req.body) : req.body || {}
+  ) as PatchRequestBody;
   if (typeof doc !== "object") throw new Error("Invalid Document Type");
   if (!Array.isArray(patch)) throw new Error("Expected patch to be array");
 

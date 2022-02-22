@@ -10,9 +10,9 @@ export const authUser = (req: Request, res: Response) =>
   routeWrapper(req, res, handler);
 
 async function handler({ body }: Request, res: Response) {
-  if (typeof body !== "string") throw new Error("Invalid Body");
-
-  const data = JSON.parse(body) as AuthRequestBody;
+  const data = (
+    typeof body === "string" ? JSON.parse(body) : body || {}
+  ) as AuthRequestBody;
   if (!data.username || !data.password) throw new Error("Missing properties");
 
   const { privateKey, publicKey } = await jose.generateKeyPair(JWT_ALG);
