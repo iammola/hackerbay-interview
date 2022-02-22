@@ -21,8 +21,8 @@ export async function routeWrapper(
   } catch (error) {
     res.status(StatusCodes.BAD_REQUEST);
     res.json({
-      message: ReasonPhrases.BAD_REQUEST,
-      error: (error as { message: string }).message,
+      code: ReasonPhrases.BAD_REQUEST,
+      message: (error as { message: string }).message,
     });
   }
 }
