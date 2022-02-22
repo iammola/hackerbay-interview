@@ -45,7 +45,7 @@ Content-Type: "application/json"
 
 ```json
 {
-  "jwt": "<YOUR_JWT_TOKEN>"
+  "token": "<YOUR_JWT_TOKEN>"
 }
 ```
 

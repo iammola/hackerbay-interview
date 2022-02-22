@@ -17,7 +17,7 @@ async function handler({ body }: Request, res: Response) {
 
   const { privateKey, publicKey } = await jose.generateKeyPair(JWT_ALG);
 
-  const jwt = await new jose.SignJWT(data)
+  const token = await new jose.SignJWT(data)
     .setIssuedAt()
     .setProtectedHeader({
       typ: "JWT",
@@ -29,5 +29,5 @@ async function handler({ body }: Request, res: Response) {
   res.setCookie(JWT_TOKEN_NAME, await jose.exportSPKI(publicKey), {
     path: "/api",
   });
-  res.json({ jwt });
+  res.json({ token });
 }
