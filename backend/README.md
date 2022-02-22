@@ -64,10 +64,10 @@ Authorization: "Bearer <YOUR_JWT_TOKEN>"
 
 ##### Request Body
 
-| Name    | Type                                  | Description              |
-| :------ | :------------------------------------ | :----------------------- |
-| `doc`   | `Record<string, unknown>`             | The original JSON object |
-| `patch` | [`PatchObject[]`](src/types/index.ts) | The patch JSON object    |
+| Name    | Type                                  | Description                            |
+| :------ | :------------------------------------ | :------------------------------------- |
+| `doc`   | `Record<string, unknown>`             | **Required.** The original JSON object |
+| `patch` | [`PatchObject[]`](src/types/index.ts) | **Required.** The patch JSON object    |
 
 #### Response
 
@@ -92,9 +92,10 @@ Authorization: "Bearer <YOUR_JWT_TOKEN>"
 
 ##### Request Body
 
-| Name  | Type     | Description         |
-| :---- | :------- | :------------------ |
-| `url` | `string` | URL to public image |
+| Name      | Type                                                                                                                                              | Description                                   |
+| :-------- | :------------------------------------------------------------------------------------------------------------------------------------------------ | :-------------------------------------------- |
+| `url`     | `string`                                                                                                                                          | **Required.** URL to public image             |
+| `format?` | `avif`, `dz`, `fits`, `gif`, `heif`, `input`, `jpeg`, `jpg`, `magick`, `openslide`, `pdf`, `png`, `ppm`, `raw`, `svg`, `tiff`, `tif`, `v`, `webp` | Format of resulting image (**default** - png) |
 
 #### Response
 
