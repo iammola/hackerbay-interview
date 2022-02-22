@@ -14,9 +14,26 @@ const formats = [
   "webp",
 ] as (keyof FormatEnum)[];
 
+/**
+ * Send a POST request to the `/api/thumbnail` route with a link to an image and an optional return format, and the image will be scaled and sent to response
+ *
+ * @param `{@link Request} req HTTP Request
+ * @param `{@link Response} res HTTP Response
+ *
+ * @see https://jwt.io/
+ */
 export const shrinkImageToThumbnail = (req: Request, res: Response) =>
   routeWrapper(req, res, handler);
 
+/**
+ * Checks if request is authenticated before resizing the Image and streaming to response
+ *
+ * @param `{@link Request} req HTTP Request
+ * @param `{@link Response} res HTTP Response
+ *
+ * @throws {Error} If the requested return format is not supported
+ * @throws {Error} If the URL provided doesn't serve an image
+ */
 async function handler(req: Request, res: Response) {
   const invalid = await validateJWT(req, res);
   if (invalid) return;

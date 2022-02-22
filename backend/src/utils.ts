@@ -7,8 +7,10 @@ export const JWT_ALG = "PS256";
 export const JWT_TOKEN_NAME = "hackerbay-jwt";
 
 /**
- * @param req HTTP Request
- * @param res HTTP Response
+ * Catches all errors thrown in a route and formats the response to the client
+ *
+ * @param `{@link Request} req HTTP Request
+ * @param `{@link Response} res HTTP Response
  * @param routerHandler Endpoints handler
  */
 export async function routeWrapper(
@@ -29,8 +31,12 @@ export async function routeWrapper(
 
 /**
  * Validate JWT token
- * Throws a JWSSignatureVerificationFailed error if verification fails
- * @param req HTTP Request
+ *
+ * Checks for a `publicKey` stored in the cookies and uses it to decrypt the `JWT` token provided in the `Authorization` header
+ * @param `{@link Request} req HTTP Request
+ * @param `{@link Response} res HTTP Response
+ *
+ * @throws {@link errors.JWSSignatureVerificationFailed} if Authorization Bearer header is invalid
  */
 export async function validateJWT(
   { headers, cookies }: Request,

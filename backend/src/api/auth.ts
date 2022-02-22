@@ -6,9 +6,25 @@ import { JWT_ALG, JWT_TOKEN_NAME, routeWrapper } from "../utils";
 import type { AuthRequestBody } from "../types";
 import type { Request, Response } from "restify";
 
+/**
+ * @description Send a POST request to the `/api/auth/` route with a username and password, and get a JWT token to authenticate other routes
+ *
+ * @param `{@link Request} req HTTP Request
+ * @param `{@link Response} res HTTP Response
+ *
+ * @see https://jwt.io/
+ */
 export const authUser = (req: Request, res: Response) =>
   routeWrapper(req, res, handler);
 
+/**
+ * Checks if required fields are provided before generating JWT token and storing publicKey in the cookies
+ *
+ * @param `{@link Request} req HTTP Request
+ * @param `{@link Response} res HTTP Response
+ *
+ * @throws {Error} If `req.body` is missing any properties (username or password)
+ */
 async function handler({ body }: Request, res: Response) {
   const data = (
     typeof body === "string" ? JSON.parse(body) : body || {}
