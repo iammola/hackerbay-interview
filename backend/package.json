@@ -5,19 +5,29 @@
   "type": "module",
   "scripts": {
     "build": "tsc",
-    "start": "node --experimental-specifier-resolution=node build/server",
-    "dev": "nodemon"
+    "test": "mocha",
+    "dev": "nodemon",
+    "coverage": "nyc mocha",
+    "start": "node --experimental-specifier-resolution=node build/server"
   },
   "eslintIgnore": [
     "node_modules/*",
     "build/*"
   ],
   "devDependencies": {
+    "@types/chai": "^4.3.0",
+    "@types/mocha": "^9.1.0",
     "@types/node": "^17.0.18",
     "@types/restify": "^8.5.4",
     "@types/restify-cookies": "^0.2.8",
     "@types/sharp": "^0.29.5",
+    "@types/source-map-support": "^0.5.4",
+    "chai": "^4.3.6",
+    "chai-http": "^4.3.0",
+    "mocha": "^9.2.1",
     "nodemon": "^2.0.15",
+    "nyc": "^15.1.0",
+    "source-map-support": "^0.5.21",
     "ts-node": "^10.5.0",
     "typescript": "^4.5.5"
   },
