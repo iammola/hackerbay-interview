@@ -15,12 +15,10 @@ async function handler(req: Request, res: Response) {
 
   if (typeof req.body !== "string") throw new Error("Invalid Body");
 
-  const { url } = JSON.parse(req.body) as { url: string };
-  if (!url) throw new Error("Invalid image URL");
-
   const resizer = sharp().resize(50, 50);
+  const { url } = JSON.parse(req.body) as { url: string };
   got
-    .stream(url)
+    .stream(new URL(url))
     .pipe(resizer)
     .pipe(res)
     .on("close", () => res.end());
