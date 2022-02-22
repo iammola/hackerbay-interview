@@ -41,3 +41,8 @@ export type AuthRequestBody = {
   /** Password */
   password: string;
 };
+
+export type ThumbnailRequestBody = {
+  /** URL to public image */
+  url: string;
+};
