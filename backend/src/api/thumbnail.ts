@@ -18,7 +18,7 @@ async function handler(req: Request, res: Response) {
   const { url } = JSON.parse(req.body) as { url: string };
   if (!url) throw new Error("Invalid image URL");
 
-  const resizer = sharp().resize(50, 50).toFormat("webp");
+  const resizer = sharp().resize(50, 50);
   got
     .stream(url)
     .pipe(resizer)
