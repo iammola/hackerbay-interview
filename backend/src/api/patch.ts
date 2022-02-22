@@ -10,7 +10,9 @@ export const patchBody = (req: Request, res: Response) =>
   routeWrapper(req, res, handler);
 
 async function handler(req: Request, res: Response) {
-  await validateJWT(req);
+  const invalid = await validateJWT(req, res);
+  if (invalid) return;
+
   if (typeof req.body !== "string") throw new Error("Invalid Body");
 
   const { doc, patch } = JSON.parse(req.body) as PatchRequestBody;

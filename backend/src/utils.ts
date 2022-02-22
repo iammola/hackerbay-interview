@@ -32,7 +32,10 @@ export async function routeWrapper(
  * Throws a JWSSignatureVerificationFailed error if verification fails
  * @param req HTTP Request
  */
-export async function validateJWT({ headers, cookies }: Request) {
+export async function validateJWT(
+  { headers, cookies }: Request,
+  res: Response
+) {
   try {
     const [type, token] = (headers.authorization ?? "").split(" ");
     if (type !== "Bearer") throw new Error("Invalid authorization header");
@@ -42,8 +45,14 @@ export async function validateJWT({ headers, cookies }: Request) {
 
     await jwtVerify(token, await importSPKI(key, JWT_ALG));
   } catch (error) {
-    if (error instanceof errors.JWSSignatureVerificationFailed)
-      throw new Error("Invalid authorization token");
-    throw new Error((error as { message: string }).message);
+    res.status(StatusCodes.UNAUTHORIZED);
+    res.json({
+      code: ReasonPhrases.UNAUTHORIZED,
+      message:
+        error instanceof errors.JWSSignatureVerificationFailed
+          ? "Invalid Authorization token"
+          : (error as { message: string }).message,
+    });
+    return true;
   }
 }
