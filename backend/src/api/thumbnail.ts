@@ -12,9 +12,8 @@ import type { Request, Response } from "restify";
 import type { ThumbnailRequestBody } from "../types";
 
 const formats = [
-  ...["avif", "dz", "fits", "gif", "heif", "input", "jpeg", "jpg", "magick"],
-  ...["openslide", "pdf", "png", "ppm", "raw", "svg", "tiff", "tif", "v"],
-  "webp",
+  ...["heif", "tif", "jpeg", "jpg", "raw"],
+  ...["tiff", "avif", "webp", "gif", "png"],
 ] as (keyof FormatEnum)[];
 
 /**

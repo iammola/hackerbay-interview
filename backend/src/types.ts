@@ -1,5 +1,3 @@
-import type { FormatEnum } from "sharp";
-
 export type PatchRequestBody = {
   /** The original document */
   doc: Record<string, unknown>;
@@ -51,5 +49,15 @@ export type ThumbnailRequestBody = {
    * Format of resulting image (default - png)
    * @default png
    */
-  format?: keyof FormatEnum;
+  format?:
+    | "heif"
+    | "avif"
+    | "jpeg"
+    | "jpg"
+    | "png"
+    | "raw"
+    | "tiff"
+    | "tif"
+    | "webp"
+    | "gif";
 };

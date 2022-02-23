@@ -92,10 +92,10 @@ Authorization: "Bearer <YOUR_JWT_TOKEN>"
 
 ##### Request Body
 
-| Name      | Type                                                                                                                                              | Description                                   |
-| :-------- | :------------------------------------------------------------------------------------------------------------------------------------------------ | :-------------------------------------------- |
-| `url`     | `string`                                                                                                                                          | **Required.** URL to public image             |
-| `format?` | `avif`, `dz`, `fits`, `gif`, `heif`, `input`, `jpeg`, `jpg`, `magick`, `openslide`, `pdf`, `png`, `ppm`, `raw`, `svg`, `tiff`, `tif`, `v`, `webp` | Format of resulting image (**default** - png) |
+| Name      | Type                                                                      | Description                                     |
+| :-------- | :------------------------------------------------------------------------ | :---------------------------------------------- |
+| `url`     | `string`                                                                  | **Required.** URL to public image               |
+| `format?` | `heif`, `avif`, `jpeg`, `jpg`, `png`, `raw`, `tiff`, `tif`, `webp`, `gif` | Format of resulting image (**default** - `png`) |
 
 #### Response
 
