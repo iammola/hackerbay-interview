@@ -62,3 +62,5 @@ export async function validateJWT(
     return true;
   }
 }
+
+export * as log from "./logger";
