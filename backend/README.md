@@ -4,9 +4,17 @@
 
 This is my attempt at the HackerBay Interview Backend Task.
 
-[Link to DockerHub Repository :whale2:](https://hub.docker.com/r/iammola/hackerbayinterviewbackend)
+## Tasks :hammer_and_wrench:
 
-## Authorization
+- [x] API Routes
+- [x] Unit Test Suite
+- [x] Code Coverage Reports
+- [x] Dockerize
+- [x] Documentation
+- [x] Extra Documentation (JSDoc)
+- [ ] Logging/Monitoring
+
+## Authorization :key:
 
 All API requests required the use of a JWT token. You can get your JWT token by navigating to the `/api/auth/` endpoint with your username and password.
 
@@ -19,7 +27,7 @@ POST /api/endpoint/
 Authorization: "Bearer <YOUR_JWT_TOKEN>"
 ```
 
-## Endpoints
+## Endpoints :door:
 
 The endpoints to the app are described below.
 
@@ -51,7 +59,7 @@ Content-Type: "application/json"
 
 ---
 
-### JSON Patching
+### JSON Patching :adhesive_bandage:
 
 Applies a patch to the original JSON object and returns the patched object
 
@@ -79,7 +87,7 @@ Authorization: "Bearer <YOUR_JWT_TOKEN>"
 
 ---
 
-### Image Thumbnail Generation
+### Image Thumbnail Generation :camera:
 
 Scales the provided image down to 50x50 pixels and returns the thumbnail.
 
@@ -101,7 +109,7 @@ Authorization: "Bearer <YOUR_JWT_TOKEN>"
 
 `File` - The `50x50` thumbnail
 
-## Setup
+## Setup :shopping_cart:
 
 Clone the project
 
@@ -121,3 +129,34 @@ Start the dev server
 ```bash
 npm run dev
 ```
+
+### Docker :dolphin:
+
+This project has a working Dockerfile and has pushed to [DockerHub](https://hub.docker.com/r/iammola/hackerbayinterviewbackend)
+
+#### Build the Image
+
+```bash
+docker build --pull --rm -f "Dockerfile" -t backend:latest "."
+```
+
+#### Start a new container
+
+```bash
+docker run -d --rm backend:latest
+```
+
+## Major Packages :package:
+
+- [Docker](https://docker.com)
+- [Restify](https://npmjs.com/package/restify)
+- [Got](https://npmjs.com/package/got)
+- [Jose](https://npmjs.com/package/jose)
+- [JsonPatch](https://npmjs.com/package/jsonpatch)
+- [Sharp](https://npmjs.com/package/sharp)
+- [Mocha](https://npmjs.com/package/mocha)
+- [NYC Istanbul](https://npmjs.com/package/nyc)
+- [Chai](https://npmjs.com/package/chai)
+- [Typescript](https://npmjs.com/package/typescript)
+- [ESLint](https://npmjs.com/package/eslint)
+- [Prettier](https://npmjs.com/package/prettier)
