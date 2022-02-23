@@ -6,7 +6,7 @@ import { contentType } from "mime-types";
 import sharp, { FormatEnum } from "sharp";
 import { StatusCodes } from "http-status-codes";
 
-import { routeWrapper, validateJWT } from "../utils";
+import { log, routeWrapper, validateJWT } from "../utils";
 
 import type { Request, Response } from "restify";
 import type { ThumbnailRequestBody } from "../types";
@@ -37,14 +37,23 @@ export const shrinkImageToThumbnail = (req: Request, res: Response) =>
  * @throws {Error} If the URL provided doesn't serve an image
  */
 async function handler(req: Request, res: Response) {
+  const start = log.start("/api/thumbnail/ - Image Thumbnail Generation");
+
   const invalid = await validateJWT(req, res);
-  if (invalid) return;
+  if (invalid) {
+    log.error("Unauthorized request");
+    return;
+  }
 
   const { url, format = "png" } = (
     typeof req.body === "string" ? JSON.parse(req.body) : req.body || {}
   ) as ThumbnailRequestBody;
+  log.info("URL: ", `"${url}"`, " - ", "Format: ", `${format}`);
 
-  if (!formats.includes(format)) throw new Error("Invalid Format Type");
+  if (!formats.includes(format)) {
+    log.error(`Invalid format "${format}" provided`);
+    throw new Error("Invalid Format Type");
+  }
 
   const readStream = got.stream(new URL(url), {
     throwHttpErrors: false,
@@ -57,14 +66,26 @@ async function handler(req: Request, res: Response) {
 
   async function stream(streamResponse: PlainResponse) {
     const requestContentType = streamResponse.headers["content-type"] ?? "";
+    log.info(
+      "Content-Type: ",
+      `"${requestContentType}"`,
+      " - ",
+      "Content-Length: ",
+      streamResponse.headers["content-length"] ?? 0
+    );
 
     if (!/^image\//.test(requestContentType)) {
       readStream.destroy();
+      log.error("Resource is not an image");
       throw new Error("Resource is not an image");
     }
+
+    log.info("Starting stream");
 
     res.status(StatusCodes.OK);
     res.setHeader("Content-Type", contentType(format) || "image/png");
     await pipeline(readStream, sharp().resize(50, 50).toFormat(format), res);
+
+    log.end(start, "Success");
   }
 }
