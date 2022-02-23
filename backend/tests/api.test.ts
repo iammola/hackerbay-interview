@@ -127,7 +127,7 @@ describe("API tests", () => {
 
     assert.deepEqual(res.body, {
       code: "Bad Request",
-      message: "Expected patch to be array",
+      message: "Expected patch to be an array",
     });
   });
 
