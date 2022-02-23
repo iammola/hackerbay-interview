@@ -12,7 +12,7 @@ This is my attempt at the HackerBay Interview Backend Task.
 - [x] Dockerize
 - [x] Documentation
 - [x] Extra Documentation (JSDoc)
-- [ ] Logging/Monitoring
+- [x] Logging/Monitoring
 
 ## Authorization :key:
 
@@ -160,3 +160,5 @@ docker run -d --rm backend:latest
 - [Typescript](https://npmjs.com/package/typescript)
 - [ESLint](https://npmjs.com/package/eslint)
 - [Prettier](https://npmjs.com/package/prettier)
+- [Chalk](https://npmjs.com/package/chalk)
+- [Loglevel](https://npmjs.com/package/loglevel)
