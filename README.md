@@ -2,4 +2,4 @@
 
 # HackerBay Interview
 
-<img src="https://github.com/iammola/hackerbay-interview/blob/master/images/stat.svg" alt="HackerBay Interview Wakatime Activity"/>
+<img src="https://wakatime.com/badge/user/40b80e09-3005-45c4-ab6a-3364c0b80fff/project/b1eb3563-ec43-4e9d-84af-4a3e820aa6c1.svg?style=for-the-badge" alt="HackerBay Interview Wakatime Activity"/>
