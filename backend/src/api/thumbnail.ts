@@ -1,6 +1,9 @@
-import { got } from "got";
-import sharp, { FormatEnum } from "sharp";
+import { pipeline } from "node:stream/promises";
+
+// eslint-disable-next-line import/named
+import { got, PlainResponse } from "got";
 import { contentType } from "mime-types";
+import sharp, { FormatEnum } from "sharp";
 import { StatusCodes } from "http-status-codes";
 
 import { routeWrapper, validateJWT } from "../utils";
@@ -44,21 +47,25 @@ async function handler(req: Request, res: Response) {
 
   if (!formats.includes(format)) throw new Error("Invalid Format Type");
 
-  const requestContentType =
-    (await got.head(new URL(url))).headers["content-type"] ?? "";
+  const readStream = got.stream(new URL(url), {
+    throwHttpErrors: false,
+  });
 
-  if (!/^image\//.test(requestContentType))
-    throw new Error("Resource is not an image");
+  readStream.on(
+    "response",
+    (r: PlainResponse) => void routeWrapper(req, res, async () => stream(r))
+  );
 
-  const resizer = sharp().resize(50, 50).toFormat(format);
+  async function stream(streamResponse: PlainResponse) {
+    const requestContentType = streamResponse.headers["content-type"] ?? "";
 
-  res.setHeader("Content-Type", contentType(format) || "image/png");
+    if (!/^image\//.test(requestContentType)) {
+      readStream.destroy();
+      throw new Error("Resource is not an image");
+    }
 
-  got
-    .stream(new URL(url))
-    .pipe(resizer)
-    .pipe(res)
-    .on("close", () => res.end());
-
-  res.status(StatusCodes.OK);
+    res.status(StatusCodes.OK);
+    res.setHeader("Content-Type", contentType(format) || "image/png");
+    await pipeline(readStream, sharp().resize(50, 50).toFormat(format), res);
+  }
 }
