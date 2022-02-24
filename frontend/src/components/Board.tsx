@@ -46,7 +46,9 @@ const Board: FunctionComponent<BoardProps> = ({ height, width }) => {
     const getRandomPoint = () => Math.floor(Math.random() * height * width);
 
     let player = getRandomPoint();
-    const enemies = new Array((height + width) / 2).fill(0).map(getRandomPoint);
+    const enemies = new Array(Math.floor((height + width) / 2))
+      .fill(0)
+      .map(getRandomPoint);
 
     while (enemies.includes(player)) player = getRandomPoint();
 
